@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обувной завод "Элегант"</title>
+    <title>Обувная фабрика</title>
     <style>
         /* Общие стили */
         * {
@@ -17,6 +17,7 @@
             background-color: #fff;
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
         
         a {
@@ -35,79 +36,105 @@
             padding: 0 20px;
         }
         
-        /* Шапка */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            transition: all 0.3s ease;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            font-weight: 500;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #333;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        /* Стили для уменьшенной шапки */
-        header.small-header {
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        header.small-header .header-container {
-            padding: 10px 0;
-        }
-        
-        header.small-header .logo {
-            font-size: 20px;
-        }
-        
-        header.small-header nav ul li {
-            margin-left: 20px;
-        }
-        
+        /* Шапка - адаптивная */
+       /* Основной header */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Логотип */
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Навигация */
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #000;
+    position: relative;
+}
+
+nav ul li a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #333;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover:after {
+    width: 100%;
+}
+
+/* Бургер — скрыт на десктопе */
+.burger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* --- Мобильная адаптация --- */
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav.active {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        padding: 10px 20px;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
         /* Основной контент */
         main {
             margin-top: 80px;
@@ -129,6 +156,18 @@
             animation: fadeInUp 1s forwards;
         }
         
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+        
         .hero p {
             font-size: 18px;
             max-width: 700px;
@@ -136,6 +175,13 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s 0.3s forwards;
+        }
+        
+        @media (max-width: 768px) {
+            .hero p {
+                font-size: 16px;
+                padding: 0 15px;
+            }
         }
         
         .btn {
@@ -241,11 +287,12 @@
             color: #333;
         }
         
-        /* Подвал */
+        /* Подвал - измененный */
         footer {
             background-color: #f8f8f8;
             padding: 60px 0 30px;
             color: #666;
+            text-align: center;
         }
         
         .footer-container {
@@ -253,6 +300,12 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .footer-column h3 {
@@ -263,6 +316,7 @@
         
         .footer-column ul {
             list-style: none;
+            padding: 0;
         }
         
         .footer-column ul li {
@@ -270,7 +324,6 @@
         }
         
         .footer-bottom {
-            text-align: center;
             padding-top: 30px;
             border-top: 1px solid #ddd;
         }
@@ -299,47 +352,106 @@
             transform: translateY(0);
         }
         
-        /* Анимация плавающего блока */
-        .floating-block {
+        /* Кнопка "Наверх" */
+        .floating-btn {
             position: fixed;
             right: 30px;
             bottom: 30px;
             background: #333;
             color: white;
-            padding: 15px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transform: translateY(100px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 999;
             opacity: 0;
+            transform: translateY(100px);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        .floating-block.visible {
-            transform: translateY(0);
+        .floating-btn.visible {
             opacity: 1;
+            transform: translateY(0);
         }
         
-        .floating-block:hover {
+        .floating-btn:hover {
             background: #555;
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-5px) scale(1.1);
         }
         
-        .floating-block i {
-            margin-right: 10px;
+        .floating-btn i {
             font-size: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-btn {
+                width: 40px;
+                height: 40px;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .floating-btn i {
+                font-size: 16px;
+            }
+        }
+
+        /* Стили для размерного ряда */
+        .size-selector {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .size-selector > span {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sizes span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .sizes span:hover {
+            background-color: #f5f5f5;
+        }
+
+        .sizes span.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <!-- Шапка -->
-    <header id="main-header">
+    <header>
         <div class="container header-container">
             <div class="logo">Обувная фабрика</div>
+
+            <div class="burger" id="burger">
+                &#9776; <!-- Это значок "≡" -->
+            </div>
             <nav>
                 <ul>
                     <li><a href="#about">О компании</a></li>
@@ -351,19 +463,18 @@
         </div>
     </header>
 
-    <!-- Плавающий блок -->
-    <div class="floating-block" id="floating-block">
+    <!-- Кнопка "Наверх" -->
+    <div class="floating-btn" id="floating-btn">
         <i class="fas fa-arrow-up"></i>
-        <span>Наверх</span>
     </div>
 
     <!-- Основной контент -->
     <main>
         <!-- Герой-секция -->
-        <section class="hero">
+        <section class="hero" id="about">
             <div class="container">
                 <h1>Качественная обувь от производителя</h1>
-                <p>С 1992 года мы создаем комфортную и стильную обувь, сочетающую в себе современные технологии и традиционное качество</p>
+                <p>Мы создаем комфортную и стильную обувь, сочетающую в себе современные технологии и традиционное качество</p>
                 <a href="#products" class="btn">Посмотреть коллекцию</a>
             </div>
         </section>
@@ -373,6 +484,7 @@
             <div class="container">
                 <h2 class="section-title">Наши модели</h2>
                 <div class="products-grid">
+                    <!-- Карточки товаров остаются без изменений -->
                     <div class="product-card hidden">
                         <div class="product-image">
                             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Мужские туфли">
@@ -380,6 +492,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Мужские классические туфли</h3>
                             <p class="product-description">Кожаные туфли ручной работы с удобной колодкой и прочной подошвой. Идеальный выбор для делового стиля.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">8 990 ₽</div>
                         </div>
                     </div>
@@ -391,6 +513,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Женские ботинки Chelsea</h3>
                             <p class="product-description">Элегантные ботинки на небольшом каблуке. Натуральная кожа, удобная стелька с амортизацией.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">7 490 ₽</div>
                         </div>
                     </div>
@@ -402,6 +534,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Унисекс кроссовки</h3>
                             <p class="product-description">Спортивные кроссовки с дышащим верхом и амортизирующей подошвой. Подходят для активного образа жизни.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">5 990 ₽</div>
                         </div>
                     </div>
@@ -413,6 +555,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Детские сандалии</h3>
                             <p class="product-description">Легкие и удобные сандалии для детей с регулируемыми застежками. Гипоаллергенные материалы.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">3 290 ₽</div>
                         </div>
                     </div>
@@ -424,6 +576,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Женские лоферы</h3>
                             <p class="product-description">Стильные лоферы из мягкой кожи с декоративной кисточкой. Удобная колодка и гибкая подошва.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">6 790 ₽</div>
                         </div>
                     </div>
@@ -435,6 +597,16 @@
                         <div class="product-info">
                             <h3 class="product-title">Мужские зимние ботинки</h3>
                             <p class="product-description">Теплые ботинки для холодной погоды. Водоотталкивающая пропитка, меховая подкладка, противоскользящая подошва.</p>
+                            <div class="size-selector">
+                                <span>Размеры:</span>
+                                <div class="sizes">
+                                    <span>36</span>
+                                    <span>37</span>
+                                    <span>38</span>
+                                    <span>39</span>
+                                    <span>40</span>
+                                </div>
+                            </div>
                             <div class="product-price">9 990 ₽</div>
                         </div>
                     </div>
@@ -467,20 +639,20 @@
         </section>
     </main>
 
-    <!-- Подвал -->
+    <!-- Подвал - измененный -->
     <footer id="contacts">
         <div class="container">
             <div class="footer-container">
                 <div class="footer-column">
                     <h3>О компании</h3>
-                    <p>Обувной завод "Элегант" - российский производитель качественной обуви с 1992 года.</p>
+                    <p>Обувная фабрика - российский производитель качественной обуви.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul>
                         <li>г. Москва, ул. Обувная, 15</li>
                         <li>+7 (495) 123-45-67</li>
-                        <li>info@elegant-shoes.ru</li>
+                        <li>info@zheluk.ru</li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -490,16 +662,9 @@
                         <li>Сб-Вс: выходные</li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Подписаться на новости</h3>
-                    <form>
-                        <input type="email" placeholder="Ваш email" style="padding: 10px; width: 100%; margin-bottom: 10px; border: 1px solid #ddd;">
-                        <button type="submit" style="padding: 10px 20px; background: #333; color: #fff; border: none; cursor: pointer;">Подписаться</button>
-                    </form>
-                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Обувной завод "Элегант". Все права защищены.</p>
+                <p>&copy; Обувная фабрика. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -519,9 +684,9 @@
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach(el => observer.observe(el));
         
-        // Плавная прокрутка для якорных ссылок
+        // Плавная прокрутка для якорных ссылок с кастомной анимацией
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
@@ -529,10 +694,26 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    const startPosition = window.pageYOffset;
+                    const targetPosition = targetElement.getBoundingClientRect().top + startPosition - 80;
+                    const startTime = performance.now();
+                    const duration = 800;
+                    
+                    function scrollAnimation(currentTime) {
+                        const elapsedTime = currentTime - startTime;
+                        const progress = Math.min(elapsedTime / duration, 1);
+                        const easeInOutCubic = progress < 0.5 
+                            ? 4 * progress * progress * progress 
+                            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                        
+                        window.scrollTo(0, startPosition + (targetPosition - startPosition) * easeInOutCubic);
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(scrollAnimation);
+                        }
+                    }
+                    
+                    requestAnimationFrame(scrollAnimation);
                 }
             });
         });
@@ -546,28 +727,53 @@
             });
         });
         
-        // Анимация уменьшения шапки при скролле
+        // Показываем/скрываем кнопку "Наверх" при скролле
         window.addEventListener('scroll', function() {
-            const header = document.getElementById('main-header');
-            const floatingBlock = document.getElementById('floating-block');
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 100) {
-                header.classList.add('small-header');
-                floatingBlock.classList.add('visible');
+            const floatingBtn = document.getElementById('floating-btn');
+            if (window.pageYOffset > 300) {
+                floatingBtn.classList.add('visible');
             } else {
-                header.classList.remove('small-header');
-                floatingBlock.classList.remove('visible');
+                floatingBtn.classList.remove('visible');
             }
         });
         
-        // Обработчик клика для плавающего блока (кнопка "Наверх")
-        document.getElementById('floating-block').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        // Плавная прокрутка вверх при клике на кнопку
+        document.getElementById('floating-btn').addEventListener('click', function() {
+            const startPosition = window.pageYOffset;
+            const startTime = performance.now();
+            const duration = 800;
+            
+            function scrollToTop(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easeInOutCubic = progress < 0.5 
+                    ? 4 * progress * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                
+                window.scrollTo(0, startPosition * (1 - easeInOutCubic));
+                
+                if (progress < 1) {
+                    requestAnimationFrame(scrollToTop);
+                }
+            }
+            
+            requestAnimationFrame(scrollToTop);
         });
+
+        
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const burger = document.getElementById("burger");
+        const nav = document.querySelector("nav");
+
+        burger.addEventListener("click", function () {
+            nav.classList.toggle("active");
+        });
+    });
+</script>
+
+
 </body>
 </html>
